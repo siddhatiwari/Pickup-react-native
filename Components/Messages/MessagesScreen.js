@@ -6,15 +6,9 @@ import {
 } from 'react-native'
 
 export default class MessagesScreen extends Component {
-  static navigationOptions = {
-    drawerLabel: 'Home',
-    headerLeft: <Text onPress={() => 
-  this.props.navigation.navigate('DrawerOpen')}>Menu</Text>
-  };
-
 	render() {
 		return (
-			<View backgroundColor='yellow'>
+			<View backgroundColor='green'>
 				<Text> Messages </Text>
 			</View>
 		);

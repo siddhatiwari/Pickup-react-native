@@ -7,11 +7,6 @@ import {
 import { MapView } from 'expo';
 
 export default class MapScreen extends Component {
-	 static navigationOptions = {
-    drawerLabel: 'Home',
-    headerLeft: <Text onPress={() => this.props.navigation.navigate('DrawerOpen')}>Menu</Text>
-  };
-
 	render() {
 		return (
 			<MapView 
