@@ -1,37 +1,28 @@
 import React from 'React';
 import { Text } from 'react-native'
-import {
-	StackNavigator,
-	DrawerNavigator
-} from 'react-navigation'
+import { StackNavigator, TabNavigator } from 'react-navigation'
 import MapScreen from './Map/MapScreen'
 import MessagesScreen from './Messages/MessagesScreen'	
 
 const MapStack = StackNavigator({
 	mapScreen: { screen: MapScreen }
 }, {
-	headerMode: 'float',
-	navigationOptions: ({navigation}) => ({
-		headerStyle: {backgroundColor: 'green'},
-		title: 'Map',
-		headerLeft: <Text onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
-	})
+	headerMode: 'none',
 })
 
 const MessagesStack = StackNavigator({
 	messagesScreen: { screen: MessagesScreen },
 }, {
 	headerMode: 'float',
-	navigationOptions: ({navigation}) => ({
-		headerStyle: {backgroundColor: 'blue'},
+	navigationOptions: {
+		headerStyle: {backgroundColor: '#1E90FF'},
 		title: 'Messages',
-		headerLeft: <Text onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
-	})
+	}
 })
 
-const DrawerStack = DrawerNavigator({
-	Messages: { screen: MessagesStack },
-	Map: { screen: MapStack }
+const TabStack = TabNavigator({
+	Map: { screen: MapStack },
+	Messages: { screen: MessagesStack }
 })
 
-export default DrawerStack
+export default TabStack

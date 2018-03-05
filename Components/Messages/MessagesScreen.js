@@ -9,7 +9,7 @@ export default class MessagesScreen extends Component {
 	render() {
 		return (
 			<View backgroundColor='green'>
-				<Text> Messages </Text>
+				
 			</View>
 		);
 	}
