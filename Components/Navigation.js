@@ -15,7 +15,9 @@ const MessagesStack = StackNavigator({
 }, {
 	headerMode: 'float',
 	navigationOptions: {
-		headerStyle: {backgroundColor: '#1E90FF'},
+		headerStyle: {backgroundColor: '#1976D2'},
+		headerTintColor: 'white',
+		titleStyle: {color: 'white'},
 		title: 'Messages',
 	}
 })

@@ -5,7 +5,7 @@ import {
 	View 
 } from 'react-native';
 import Map from '../Map/Map'
-import CurrentLocationButton from '../Map/CurrentLocationButton'
+import CurrentLocationButton from './CurrentLocationButton'
 
 export default class MapScreen extends Component {
 	render() {
