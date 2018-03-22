@@ -22,7 +22,8 @@ export default class Map extends Component {
 	      longitude: -122.4324,
 	      latitudeDelta: 0.0922,
 	      longitudeDelta: 0.0421,
-		}
+		},
+		showCurrentLocationButton: false
 	}
 
   componentDidMount() {
@@ -36,6 +37,22 @@ export default class Map extends Component {
       }
       this.onRegionChange(region);
     });
+  }
+
+  onRegionChange(region) {
+    this.setState({ region: region });
+    navigator.geolocation.getCurrentPosition((position) => {
+    	//alert(position.coords.latitude + "\n" + region.latitude);
+      if (position.coords.latitude == region.latitude && position.coords.longitude == region.longitude) {
+      	this.setState({ showCurrentLocationButton: false });
+      } else {
+      	this.setState({ showCurrentLocationButton: true });
+      }
+  	});
+  }
+
+  onPress() {
+  	this.setState({ showCurrentLocationButton: true })
   }
 
   handleCreateEventButtonPress = () => {
@@ -54,10 +71,7 @@ export default class Map extends Component {
       //this.map.animateToRegion(region, 1);
       this.onRegionChange(region);
   	});
-  }
-
-  onRegionChange(region) {
-    this.setState({ region });
+  	this.setState({ showCurrentLocationButton: false });
   }
 
   componentWillUnmount() {
@@ -75,15 +89,17 @@ export default class Map extends Component {
 	          showsUserLocation={true}
 	          showsMyLocationButton={false}
 	          followUserLocation={true}
-	          onRegionChange={this.onRegionChange.bind(this)}>
-	        </MapView>
+	          onRegionChange={this.onRegionChange.bind(this)}
+	          onPress={this.onPress.bind(this)}/>
       	</View>
       	<View style={styles.mapSearchBar}>
       		<MapSearchBar />
       	</View>
-        <View style={styles.currentLocationButton}>
-					<CurrentLocationButton onPress={this.handleCurrentLocationButtonPress}/>
-				</View>
+        { this.state.showCurrentLocationButton &&
+        	<View style={styles.currentLocationButton}>
+						<CurrentLocationButton onPress={this.handleCurrentLocationButtonPress}/>
+					</View>
+        }
 				<View style={styles.createEventButton}>
 					<CreateEventButton onPress={this.handleCreateEventButtonPress}/>
 				</View>
@@ -102,7 +118,7 @@ const styles = StyleSheet.create({
   mapSearchBar: {
   	position: 'absolute',
   	marginTop: Header.HEIGHT + 5,
-  	marginLeft: (WINDOW_WIDTH - (WINDOW_WIDTH * 0.8)) / 2
+  	marginLeft: (WINDOW_WIDTH - WINDOW_WIDTH * 0.8) / 2
   },
   createEventButton: {
   	position: 'absolute',
